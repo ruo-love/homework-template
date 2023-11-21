@@ -17,23 +17,20 @@
 }
 ```
 
-### js-audio-recorder howler
+### js-audio-recorder、 howler 兼容性测试
 
 - ios
-  1. ios14： safari 支持；chrome113 不支持,且无法安装更高版本 chrome
-  2. ios15: safari 支持；chrome118 支持
-  3. ios16: safari 支持；chrome118 支持
+  ios14： safari 支持；chrome113 不支持,且无法安装更高版本 chrome
+  ios15: safari 支持；chrome118 支持
+  ios16: safari 支持；chrome118 支持
 - android
 
-  1. android-9 华为浏览器、chrome118 支持
+  android-9 华为浏览器、chrome118 支持
 
 - harmonyOs
-  1. harmonyOs3.0.0 百度浏览器、华为浏览器、chrome118 支持
+  harmonyOs3.0.0 百度浏览器、华为浏览器、chrome118 支持
 
 #### 题型数据
-
-1. FC_APQT_VFC2 录音单词卡 DsrFlashCard
-2.
 
 ```
   FC_APQT_VFC2 = "FC_APQT_VFC2", // FC_APQT_VFC2 录音单词卡 DsrFlashCard
