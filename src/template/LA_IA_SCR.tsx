@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { modeContext } from "../App";
 import { A7Tips } from "../components/A7Tips";
 import { A7Image } from "../components/A7Image";
@@ -8,6 +8,11 @@ type Props = {};
 let player: any;
 export const LA_IA_SCR: React.FC<Props> = () => {
   const data = useContext(modeContext);
+  useEffect(() => {
+    return () => {
+      player?.unload();
+    };
+  }, []);
   return (
     <div>
       <A7Tips text={data?.templates?.["instruction-cn"]} />

@@ -79,6 +79,7 @@ export const A7Record: React.FC<Props> = (props: Props) => {
   // 销毁录音器
   function destroy() {
     recorder?.destroy();
+    player?.unload();
   }
   function handleRecord() {
     if (recording) {

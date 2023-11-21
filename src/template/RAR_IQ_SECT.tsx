@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { A7WordCard } from "../components/A7WordCard";
 import { A7Record } from "../components/A7Record";
 import { modeContext } from "../App";
@@ -10,13 +10,17 @@ const base64 = `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04J
 let player: any = null;
 export const RAR_IQ_SECT: React.FC<Props> = () => {
   const data = useContext(modeContext);
-
+  useEffect(() => {
+    return () => {
+      player?.unload();
+    };
+  }, []);
   return (
     <div>
       <A7Tips text={data?.templates?.["instruction-en"]} />
       <div className="flex">
         {data?.mp3?.length > 0 &&
-          (data.mp3 as string[]).map((item,i) => {
+          (data.mp3 as string[]).map((item, i) => {
             return (
               <A7Image
                 key={i}
