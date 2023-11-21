@@ -2,22 +2,24 @@
  * Created by wenbozhao on 2017/10/11.
  */
 import _ from "lodash";
-import parseTitle from "../common/parseTitle";
 import parseResourceUrl from "../common/parseResourceUrl";
 
 export default (exercise: any) => {
   const id = exercise.data.id;
-  const questions = exercise.included.filter(
-    (item: any) => item.type === "questions"
-  );
   const resources = exercise.included
     .filter((item: any) => item.type === "resources")
+    .map((item: any) => item.attributes);
+  const options = exercise.included
+    .filter((item: any) => item.type === "options")
     .map((item: any) => item.attributes);
   const templates = exercise.included.find(
     (item: any) => item.type === "templates"
   ).attributes;
-  const text = questions[0].attributes.text;
-  const hint = questions[0].attributes.hint;
+  const questions = exercise.included
+    .filter((item: any) => item.type === "questions")
+    .map((item: any) => item.attributes);
+  const text = questions[0].text;
+  const hint = questions[0].hint;
   const mp3 = parseResource(resources, "mp3");
   const img = parseResource(resources, "swf");
   return {
@@ -26,16 +28,19 @@ export default (exercise: any) => {
     hint,
     mp3,
     img,
+    options,
+    questions,
     templates,
   };
 };
 
 function parseResource(arr: any, type: string) {
-  let result = null;
+  const results: Array<any> = [];
   arr.forEach((item: any) => {
     if (item.mime === type) {
-      result = item;
+      results.push(item);
     }
   });
-  return parseResourceUrl(result);
+
+  return results.length ? parseResourceUrl(results) : [];
 }

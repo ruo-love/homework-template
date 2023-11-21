@@ -15,34 +15,40 @@ export function parseAssetsPath(path: string) {
 }
 
 export default (resource: any) => {
-  let url = "";
-  switch (resource.mime) {
-    case "mp3":
-      if (resource["audio-path"]) {
-        url = parseAssetsPath(resource["audio-path"]);
-      }
-      break;
-
-    case "mp4":
-      if (resource["video-path"]) {
-        url = parseAssetsPath(resource["video-path"]);
-      }
-      break;
-
-    case "swf":
-      if (resource["image-path"]) {
-        if (_checkIfKellis(resource["image-path"])) {
-          url = resource["image-path"];
-        } else {
-          const match = resource["image-path"].match(/(\S+)\.png/)[1];
-          url = `${parseAssetsPath(match)}/1024x768/img.png`;
+  const urls: Array<any> = [];
+  function getUrl(source: any) {
+    let url = "";
+    switch (source.mime) {
+      case "mp3":
+        if (source["audio-path"]) {
+          url = parseAssetsPath(source["audio-path"]);
         }
-      }
-      break;
+        break;
 
-    default:
-      break;
+      case "mp4":
+        if (source["video-path"]) {
+          url = parseAssetsPath(source["video-path"]);
+        }
+        break;
+
+      case "swf":
+        if (source["image-path"]) {
+          if (_checkIfKellis(source["image-path"])) {
+            url = source["image-path"];
+          } else {
+            const match = source["image-path"].match(/(\S+)\.png/)[1];
+            url = `${parseAssetsPath(match)}/1024x768/img.png`;
+          }
+        }
+        break;
+
+      default:
+        break;
+    }
+    return url;
   }
-
-  return url;
+  resource.forEach((item:any) => {
+    urls.push(getUrl(item));
+  });
+  return urls;
 };
