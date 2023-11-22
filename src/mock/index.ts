@@ -8,6 +8,9 @@ export enum ModeMap {
   LA_IA_SCR = "LA_IA_SCR", // LA_IA_SCR 听音回答
   SA_IAQ_PLC = "SA_IAQ_PLC", //SA_IAQ_PLC 听音多题选择 ChooseByListening
   TF_IQ_STF = "TF_IQ_STF", // TF_IQ_STF 句子判断 SentenceJudgment
+  TAS_IAQ_SGF2 = "TAS_IAQ_SGF2", // TAS_IAQ_SGF2 听音填空
+  TAS_IAP_PLC = "TAS_IAP_PLC", // TAS_IAP_PLC T听音看表填空
+  TF_IAQ_STF = "TF_IAQ_STF", // TF_IAQ_STF 听句看句判断
 }
 
 export async function getExercises(mode: ModeMap) {

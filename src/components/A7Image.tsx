@@ -1,5 +1,4 @@
 import React from "react";
-import { act } from "react-dom/test-utils";
 type Props = {
   src: string;
   activeSrc?: string;
